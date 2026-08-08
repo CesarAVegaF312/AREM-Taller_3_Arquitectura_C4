@@ -328,4 +328,32 @@ flowchart LR
 
 ---
 
+## Vista ArchiMate equivalente
+
+Los contenedores del C2 mapean casi 1:1 a **Application Components** de ArchiMate (ver la [Guía de Notación ArchiMate](https://github.com/CesarAVegaF312/AREM-ArchiMate/blob/main/guia_notacion_archimate.md)); las relaciones entre ellos usan **Serving** en vez de flechas genéricas.
+
+```mermaid
+flowchart TD
+    subgraph negocio["Negocio"]
+        usuario(["🧑 Usuario Final"])
+    end
+    subgraph aplicacion["Aplicación"]
+        appmovil["App Móvil"]
+        gestion["Módulo de Gestión de Paquetes"]
+    end
+
+    usuario -->|"usa"| appmovil
+    appmovil -->|"sirve a"| usuario
+    gestion -->|"sirve a"| appmovil
+
+    classDef negocio fill:#ffff99,color:#000,stroke:#cccc00;
+    classDef aplicacion fill:#99ccff,color:#000,stroke:#3366cc;
+    class usuario negocio
+    class appmovil,gestion aplicacion
+```
+
+La diferencia con el C2 original: en C4 la relación se etiqueta con protocolo ("HTTPS/JSON"); en ArchiMate se etiqueta con el tipo semántico de relación (**Serving**). Ambas notaciones son válidas para el mismo contenedor — C4 responde "cómo se comunican técnicamente", ArchiMate responde "quién depende de quién en la arquitectura".
+
+---
+
 _Esta guía hace parte del Taller 3 de Arquitectura Actual del Sistema con el Modelo C4 — curso Arquitectura Empresarial, Universidad de La Sabana._
