@@ -297,6 +297,8 @@ flowchart LR
     class lb,db infra
 ```
 
+> 🖼️ Vea las dos vistas finales (C1 y C2) como un diagrama interactivo clickeable en [`clase/visualizacion-c4.html`](visualizacion-c4.html).
+
 ### B.4 Errores comunes en C2
 
 | Error frecuente | Por qué es un problema | Cómo corregirlo |

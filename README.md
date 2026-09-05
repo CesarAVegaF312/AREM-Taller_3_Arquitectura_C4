@@ -10,6 +10,12 @@ Representar la arquitectura actual del sistema del cliente utilizando las vistas
 
 Antes de empezar a modelar, revise la [**Guía Paso a Paso: Arquitectura Actual del Sistema con el Modelo C4**](clase/guia_paso_a_paso_c4.md). Incluye la leyenda de notación de C1 y C2, la metodología de 4 pasos para cada vista, un ejemplo completo construido paso a paso sobre el propio caso de RedExpress, y una comparación de errores comunes vs. modelo corregido para cada vista.
 
+### 🖼️ Versión visual: Modelo C4 de RedExpress
+
+[`clase/visualizacion-c4.html`](clase/visualizacion-c4.html) es una página interactiva autocontenida: un switch entre las vistas **C1 (Contexto)** y **C2 (Contenedores)** de RedExpress, cada una con un diagrama SVG clickeable — actores y sistemas externos alrededor de la Plataforma RedExpress en C1, sus contenedores internos (App Móvil, Portal Web Operadores, Módulo de Gestión de Paquetes, Motor de Rutas, Seguimiento GPS, Sistema de Alertas), el Balanceador de Carga y la Base de Datos Distribuida en C2 — que muestra en un panel el rol o la tecnología y las conexiones/protocolo de cada elemento seleccionado, además de la metodología de 4 pasos y los errores comunes de cada vista. GitHub no la renderiza interactiva desde la vista de archivo; para verla:
+- Descargue el archivo y ábralo con doble clic (funciona sin conexión, es HTML plano), o
+- Pegue esta URL en [htmlpreview.github.io](https://htmlpreview.github.io/): `https://raw.githubusercontent.com/CesarAVegaF312/AREM-Taller_3_Arquitectura_C4/main/clase/visualizacion-c4.html`
+
 ## 🚚 Caso base de referencia: RedExpress (Plataforma de Logística)
 
 RedExpress es una empresa nacional de logística y envíos que ha digitalizado la mayoría de sus operaciones. Ofrece una app móvil para usuarios finales, un sistema de gestión de rutas para operadores logísticos, y un dashboard de seguimiento para clientes corporativos. Su arquitectura actual integra servicios en la nube con bases de datos distribuidas, motores de cálculo de rutas y APIs de terceros para notificaciones. Comprender la estructura de sus sistemas y cómo los actores interactúan con ellos es clave para mejorar la eficiencia operativa y escalar a nuevas regiones.
