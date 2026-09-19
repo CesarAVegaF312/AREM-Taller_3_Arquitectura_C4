@@ -1,4 +1,4 @@
-# 🧭 Guía Paso a Paso: Arquitectura Actual del Sistema con el Modelo C4
+# Guía Paso a Paso: Arquitectura Actual del Sistema con el Modelo C4
 
 Esta guía complementa el `README.md` del taller. Cubre los dos entregables de la Parte 1 y la Parte 2: la **vista de contexto (C1)** y la **vista de contenedores (C2)** del modelo C4, ambas construidas sobre el caso base de RedExpress.
 
@@ -19,7 +19,7 @@ Los diagramas de ejemplo de esta guía están escritos en [Mermaid](https://merm
 
 ```mermaid
 flowchart LR
-    p(["🧑 Persona<br/>Ej: Usuario Final"])
+    p(["Persona<br/>Ej: Usuario Final"])
     s["Sistema en alcance<br/>Ej: Plataforma RedExpress"]
     e[["Sistema externo<br/>Ej: API de Notificaciones"]]
 
@@ -49,9 +49,9 @@ Del caso base se extraen los tres actores humanos: **Usuario Final** (rastrea su
 
 ```mermaid
 flowchart LR
-    usuario(["🧑 Usuario Final"])
-    mensajero(["🧑 Mensajero"])
-    operador(["🧑 Operador Logístico"])
+    usuario(["Usuario Final"])
+    mensajero(["Mensajero"])
+    operador(["Operador Logístico"])
 
     classDef person fill:#1168bd,color:#fff,stroke:#0b4884;
     class usuario,mensajero,operador person
@@ -63,9 +63,9 @@ Se dibuja **Plataforma RedExpress** como el sistema en alcance (una sola caja, s
 
 ```mermaid
 flowchart LR
-    usuario(["🧑 Usuario Final"])
-    mensajero(["🧑 Mensajero"])
-    operador(["🧑 Operador Logístico"])
+    usuario(["Usuario Final"])
+    mensajero(["Mensajero"])
+    operador(["Operador Logístico"])
     redexpress["Plataforma RedExpress"]
     notif[["API de Notificaciones"]]
     geo[["Proveedor de Geolocalización"]]
@@ -84,9 +84,9 @@ Se conecta cada actor con la plataforma y la plataforma con cada sistema externo
 
 ```mermaid
 flowchart LR
-    usuario(["🧑 Usuario Final"]) --> redexpress["Plataforma RedExpress"]
-    mensajero(["🧑 Mensajero"]) --> redexpress
-    operador(["🧑 Operador Logístico"]) --> redexpress
+    usuario(["Usuario Final"]) --> redexpress["Plataforma RedExpress"]
+    mensajero(["Mensajero"]) --> redexpress
+    operador(["Operador Logístico"]) --> redexpress
     redexpress -.-> notif[["API de Notificaciones"]]
     redexpress -.-> geo[["Proveedor de Geolocalización"]]
 
@@ -104,9 +104,9 @@ Se etiqueta cada flecha con el verbo y la información que se intercambia. El di
 
 ```mermaid
 flowchart LR
-    usuario(["🧑 Usuario Final"]) -->|"Rastrea envíos y agenda recogidas"| redexpress["Plataforma RedExpress"]
-    mensajero(["🧑 Mensajero"]) -->|"Actualiza estado de entregas"| redexpress
-    operador(["🧑 Operador Logístico"]) -->|"Gestiona rutas y despachos"| redexpress
+    usuario(["Usuario Final"]) -->|"Rastrea envíos y agenda recogidas"| redexpress["Plataforma RedExpress"]
+    mensajero(["Mensajero"]) -->|"Actualiza estado de entregas"| redexpress
+    operador(["Operador Logístico"]) -->|"Gestiona rutas y despachos"| redexpress
     redexpress -.->|"Envía alertas de estado (API REST)"| notif[["API de Notificaciones"]]
     redexpress -.->|"Consulta coordenadas y calcula rutas (API REST)"| geo[["Proveedor de Geolocalización"]]
 
@@ -209,9 +209,9 @@ Se conectan los contenedores entre sí, y se retoman los actores y sistemas exte
 
 ```mermaid
 flowchart LR
-    usuario(["🧑 Usuario Final"])
-    mensajero(["🧑 Mensajero"])
-    operador(["🧑 Operador Logístico"])
+    usuario(["Usuario Final"])
+    mensajero(["Mensajero"])
+    operador(["Operador Logístico"])
     notif[["API de Notificaciones"]]
     geo[["Proveedor de Geolocalización"]]
 
@@ -256,9 +256,9 @@ Se etiqueta cada relación con el protocolo o mecanismo de comunicación. El dia
 
 ```mermaid
 flowchart LR
-    usuario(["🧑 Usuario Final"])
-    mensajero(["🧑 Mensajero"])
-    operador(["🧑 Operador Logístico"])
+    usuario(["Usuario Final"])
+    mensajero(["Mensajero"])
+    operador(["Operador Logístico"])
     notif[["API de Notificaciones"]]
     geo[["Proveedor de Geolocalización"]]
 
@@ -297,7 +297,7 @@ flowchart LR
     class lb,db infra
 ```
 
-> 🖼️ Vea las dos vistas finales (C1 y C2) como un diagrama interactivo clickeable en [`clase/visualizacion-c4.html`](visualizacion-c4.html).
+> Vea las dos vistas finales (C1 y C2) como un diagrama interactivo clickeable en [`clase/visualizacion-c4.html`](visualizacion-c4.html).
 
 ### B.4 Errores comunes en C2
 
@@ -337,7 +337,7 @@ Los contenedores del C2 mapean casi 1:1 a **Application Components** de ArchiMat
 ```mermaid
 flowchart TD
     subgraph negocio["Negocio"]
-        usuario(["🧑 Usuario Final"])
+        usuario(["Usuario Final"])
     end
     subgraph aplicacion["Aplicación"]
         appmovil["App Móvil"]
