@@ -10,6 +10,8 @@ Representar la arquitectura actual del sistema del cliente utilizando las vistas
 
 Antes de empezar a modelar, revise la [**Guía Paso a Paso: Arquitectura Actual del Sistema con el Modelo C4**](clase/guia_paso_a_paso_c4.md). Incluye la leyenda de notación de C1 y C2, la metodología de 4 pasos para cada vista, un ejemplo completo construido paso a paso sobre el propio caso de RedExpress, y una comparación de errores comunes vs. modelo corregido para cada vista.
 
+La presentación de la clase está en [`4. Documentar_arquitectura_software_v2.pptx`](4.%20Documentar_arquitectura_software_v2.pptx) (versión para estudiantes, sin notas del orador).
+
 ### Versión visual: Modelo C4 de RedExpress
 
 [`clase/visualizacion-c4.html`](clase/visualizacion-c4.html) es una página interactiva autocontenida: un switch entre las vistas **C1 (Contexto)** y **C2 (Contenedores)** de RedExpress, cada una con un diagrama SVG clickeable — actores y sistemas externos alrededor de la Plataforma RedExpress en C1, sus contenedores internos (App Móvil, Portal Web Operadores, Módulo de Gestión de Paquetes, Motor de Rutas, Seguimiento GPS, Sistema de Alertas), el Balanceador de Carga y la Base de Datos Distribuida en C2 — que muestra en un panel el rol o la tecnología y las conexiones/protocolo de cada elemento seleccionado, además de la metodología de 4 pasos y los errores comunes de cada vista. GitHub no la renderiza interactiva desde la vista de archivo; para verla:
