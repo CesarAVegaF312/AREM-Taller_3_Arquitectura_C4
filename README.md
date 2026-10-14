@@ -10,7 +10,7 @@ Representar la arquitectura actual del sistema del cliente utilizando las vistas
 
 Antes de empezar a modelar, revise la [**Guía Paso a Paso: Arquitectura Actual del Sistema con el Modelo C4**](clase/guia_paso_a_paso_c4.md). Incluye la leyenda de notación de C1 y C2, la metodología de 4 pasos para cada vista, un ejemplo completo construido paso a paso sobre el propio caso de RedExpress, y una comparación de errores comunes vs. modelo corregido para cada vista.
 
-La presentación de la clase está en [`4. Documentar_arquitectura_software_v2.pptx`](4.%20Documentar_arquitectura_software_v2.pptx) (versión para estudiantes, sin notas del orador).
+La presentación de la clase está en [`3. Documentar_arquitectura_software_v2.pptx`](3.%20Documentar_arquitectura_software_v2.pptx) (versión para estudiantes, sin notas del orador).
 
 ### Versión visual: Modelo C4 de RedExpress
 
