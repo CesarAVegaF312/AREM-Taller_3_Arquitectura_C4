@@ -14,9 +14,7 @@ La presentación de la clase está en [`4. Documentar_arquitectura_software_v2.p
 
 ### Versión visual: Modelo C4 de RedExpress
 
-[`clase/visualizacion-c4.html`](clase/visualizacion-c4.html) es una página interactiva autocontenida: un switch entre las vistas **C1 (Contexto)** y **C2 (Contenedores)** de RedExpress, cada una con un diagrama SVG clickeable — actores y sistemas externos alrededor de la Plataforma RedExpress en C1, sus contenedores internos (App Móvil, Portal Web Operadores, Módulo de Gestión de Paquetes, Motor de Rutas, Seguimiento GPS, Sistema de Alertas), el Balanceador de Carga y la Base de Datos Distribuida en C2 — que muestra en un panel el rol o la tecnología y las conexiones/protocolo de cada elemento seleccionado, además de la metodología de 4 pasos y los errores comunes de cada vista. GitHub no la renderiza interactiva desde la vista de archivo; para verla:
-- Descargue el archivo y ábralo con doble clic (funciona sin conexión, es HTML plano), o
-- Pegue esta URL en [htmlpreview.github.io](https://htmlpreview.github.io/): `https://raw.githubusercontent.com/CesarAVegaF312/AREM-Taller_3_Arquitectura_C4/main/clase/visualizacion-c4.html`
+[`clase/visualizacion-c4.html`](clase/visualizacion-c4.html) es una página interactiva autocontenida: un switch entre las vistas **C1 (Contexto)** y **C2 (Contenedores)** de RedExpress, cada una con un diagrama SVG clickeable — actores y sistemas externos alrededor de la Plataforma RedExpress en C1, sus contenedores internos (App Móvil, Portal Web Operadores, Módulo de Gestión de Paquetes, Motor de Rutas, Seguimiento GPS, Sistema de Alertas), el Balanceador de Carga y la Base de Datos Distribuida en C2 — que muestra en un panel el rol o la tecnología y las conexiones/protocolo de cada elemento seleccionado, además de la metodología de 4 pasos y los errores comunes de cada vista. Ábrala directamente en el navegador: **[ver la página interactiva](https://cesaravegaf312.github.io/AREM-Taller_3_Arquitectura_C4/clase/visualizacion-c4.html)**. También puede descargar el archivo y abrirlo con doble clic; funciona sin conexión.
 
 ## Caso base de referencia: RedExpress (Plataforma de Logística)
 
