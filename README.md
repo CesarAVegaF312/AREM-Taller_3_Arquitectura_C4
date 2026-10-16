@@ -60,6 +60,7 @@ Después de la clase, el equipo debe:
 
 - Modelar las vistas C1 y C2 aplicadas al sistema del cliente real, siguiendo los mismos 4 pasos de cada metodología.
 - Documentar componentes clave, flujos, roles y debilidades actuales.
+- Registrar las decisiones de modelado y de arquitectura en `entrega/decisiones.md` usando la [plantilla de decisiones](plantillas/plantilla_decisiones.md): mínimo 3 decisiones (decisión, alternativas consideradas, razón y consecuencia), más el glosario y los supuestos del modelo. El Módulo 4 lo pide como entregable del taller (es lo que diferencia documentación de decoración) y en el Taller 9 estas decisiones son la semilla de las ADR del procedimiento de cambios.
 - Redactar el informe en `entrega/informe.md` usando la [plantilla de informe del taller](plantillas/plantilla_informe_taller.md); explicar la estructura actual, las diferencias con el caso base y las justificaciones de cada decisión de modelado.
 - Investigar ejemplos reales de arquitecturas C4 en el sector del cliente, y registrar las fuentes en `entrega/referencias.md` con la [plantilla de referencias](plantillas/plantilla_referencias.md).
 
@@ -78,9 +79,11 @@ taller-03-arquitectura-c4/
 ├── entrega/
 │   ├── c1-contexto-final.drawio
 │   ├── c2-contenedores-final.drawio
+│   ├── decisiones.md               # Ver plantillas/plantilla_decisiones.md
 │   ├── informe.md                  # Ver plantillas/plantilla_informe_taller.md
 │   └── referencias.md              # Ver plantillas/plantilla_referencias.md
 └── plantillas/
+    ├── plantilla_decisiones.md
     ├── plantilla_informe_taller.md
     ├── plantilla_notas.md
     └── plantilla_referencias.md
@@ -95,6 +98,7 @@ Antes de entregar, compare sus dos vistas contra los errores más frecuentes (co
 ## Entregables
 
 - Diagrama C1 y C2 del sistema real del cliente
+- Registro de decisiones, glosario y supuestos (`decisiones.md`)
 - Informe técnico explicativo (`informe.md`)
 - Referencias técnicas e investigación complementaria (`referencias.md`)
 

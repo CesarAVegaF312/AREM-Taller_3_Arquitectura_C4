@@ -310,6 +310,22 @@ flowchart LR
 
 ---
 
+## 4+1 como lista de verificación
+
+C4 sirve para dibujar; el modelo de vistas 4+1 (Kruchten) sirve para verificar que no falta nada. Antes de dar por terminados el C1 y el C2, recorra las cinco vistas y pregúntese dónde queda cubierta cada una con lo que ya entregó:
+
+| Vista 4+1 | Qué responde | Dónde debería estar en su entrega |
+|---|---|---|
+| Lógica | Qué hace el sistema: funcionalidad y entidades | Contenedores por responsabilidad en el C2 y el ERD del Taller 2 |
+| Desarrollo | Cómo se organiza el código y en qué tecnología | Tecnología indicada en cada contenedor del C2 y decisiones registradas en `decisiones.md` |
+| Proceso | Qué ocurre en tiempo de ejecución: flujos, concurrencia, comunicación | Relaciones etiquetadas con protocolo en el C2 y el BPMN del Taller 1 |
+| Física | Dónde se despliega cada pieza | Se completa en el Taller 4 (infraestructura); aquí basta con la infraestructura de soporte del C2 |
+| Escenarios | Casos de uso que atraviesan las otras cuatro vistas | Actores y relaciones del C1, y un flujo crítico narrado en el informe |
+
+Si una vista no tiene dónde vivir, falta algo en el diagrama, en `decisiones.md` o en el informe. No hace falta dibujar cinco diagramas: hace falta poder responder las cinco preguntas con lo que ya se entregó.
+
+---
+
 ## Checklist de autoevaluación antes de entregar
 
 **Vista de Contexto (C1):**
