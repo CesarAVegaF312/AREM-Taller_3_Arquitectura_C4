@@ -1,0 +1,12 @@
+# Structurizr Lite: dibuja las vistas C1 y C2 a partir de workspace.dsl.
+#
+#   docker compose up        # luego abra http://localhost:8080
+#   (Ctrl+C para detenerlo)  # cada cambio en workspace.dsl se ve al recargar la página
+#   docker compose down
+services:
+  structurizr:
+    image: structurizr/lite:2025.11.08
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/usr/local/structurizr

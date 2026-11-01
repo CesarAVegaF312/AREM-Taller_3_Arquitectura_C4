@@ -64,6 +64,14 @@ Después de la clase, el equipo debe:
 
 ---
 
+## Validación técnica, análisis de casos y tecnología (opcional)
+
+Para comprobar que el C1 y el C2 son consistentes entre sí, el equipo puede escribir el modelo una sola vez como código (Structurizr DSL) y abrirlo con Structurizr Lite en Docker: la herramienta dibuja las dos vistas, rechaza relaciones hacia elementos que no existen y señala relaciones sin protocolo. No es un ejercicio de programación: el modelo de RedExpress ya está escrito en [`clase/validacion-tecnica/`](clase/validacion-tecnica/) y solo se adapta al cliente. El procedimiento está en la [Parte C de la guía paso a paso](clase/guia_paso_a_paso_c4.md#parte-c--validación-técnica-del-modelo-como-código-opcional). Las inconsistencias encontradas se documentan en `entrega/informe.md`; los diagramas de draw.io siguen siendo el entregable.
+
+**Análisis de caso real y tecnología.** La [Parte D de la guía](clase/guia_paso_a_paso_c4.md#parte-d--análisis-de-caso-real-y-panorama-tecnológico-opcional) analiza la decisión de Amazon Prime Video de pasar un servicio de microservicios a un monolito (2023) como una decisión de C2, y presenta el panorama de herramientas para documentar C4 y de estilos de arquitectura. El equipo analiza un caso del sector de su cliente con la [plantilla de análisis de caso](plantillas/plantilla_analisis_caso.md) en `entrega/analisis-caso.md`.
+
+---
+
 ## Estructura esperada del repositorio
 
 ```text
