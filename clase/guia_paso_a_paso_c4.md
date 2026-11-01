@@ -374,4 +374,108 @@ La diferencia con el C2 original: en C4 la relación se etiqueta con protocolo (
 
 ---
 
+## Parte C — Validación técnica del modelo como código (opcional)
+
+En draw.io, el C1 y el C2 son dos dibujos independientes: nada impide que digan cosas distintas, que una flecha apunte a una caja que no existe o que a una relación le falte el protocolo. Esta parte propone **comprobar el modelo** escribiéndolo una sola vez como código y dejando que una herramienta dibuje las dos vistas y revise su consistencia. No es un ejercicio de programación: el modelo del caso base ya está escrito en [`validacion-tecnica/workspace.dsl`](validacion-tecnica/workspace.dsl) y solo hay que leerlo y adaptarlo.
+
+### C.1 Qué se necesita
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (o Docker Engine en Linux). La imagen de [Structurizr Lite](https://docs.structurizr.com/lite) pesa unos 400 MB.
+- Un editor de texto para el archivo `.dsl` (VS Code, el Bloc de notas o cualquiera).
+
+### C.2 Abrir el modelo del caso base
+
+Desde la carpeta `clase/validacion-tecnica/`:
+
+```bash
+docker compose up        # luego abra http://localhost:8080 en el navegador
+```
+
+Aparecen las dos vistas, **C1-Contexto** y **C2-Contenedores**, dibujadas a partir del mismo archivo. Cada vez que se guarda un cambio en `workspace.dsl`, basta con recargar la página. Para terminar: `Ctrl+C` y luego `docker compose down`.
+
+### C.3 Del diagrama al código
+
+| En el diagrama | En `workspace.dsl` |
+|---|---|
+| Actor (persona) | `person "Nombre" "Descripción"` |
+| Sistema externo | `softwareSystem "Nombre" "Descripción" "Externo"` |
+| Sistema en alcance | `softwareSystem` con sus contenedores adentro, entre llaves |
+| Contenedor | `container "Nombre" "Responsabilidad" "Tecnología"` |
+| Relación | `origen -> destino "Verbo e información" "Protocolo"` |
+
+La diferencia de fondo con draw.io: **el C1 no se dibuja, se deduce**. El archivo solo tiene las relaciones del C2 (entre contenedores, actores y sistemas externos), y Structurizr calcula a partir de ellas las flechas del C1. Por eso las dos vistas no pueden contradecirse.
+
+### C.4 Qué revela la validación
+
+Las tres pruebas siguientes se hicieron sobre el caso base y dan exactamente este resultado:
+
+| # | Qué se hace | Qué muestra Structurizr | Qué significa |
+|---|---|---|---|
+| 1 | Agregar una relación hacia un contenedor que no existe, por ejemplo `redexpress.gestion -> redexpress.facturacion "Genera la factura del envío"` | No dibuja nada y muestra: `The destination element "redexpress.facturacion" does not exist at line 51` | Una flecha hacia una caja que nadie definió. En draw.io pasa desapercibida. |
+| 2 | Borrar la relación `redexpress.rutas -> geolocalizacion` | El Proveedor de Geolocalización desaparece del C2 **y también del C1** | En el C1 de la guía hay una flecha hacia ese proveedor, pero si ningún contenedor lo usa, esa flecha no tiene respaldo. El C1 solo puede mostrar lo que el C2 justifica. |
+| 3 | Abrir las inspecciones: el contador del panel izquierdo, o `http://localhost:8080/workspace/inspections` | 6 errores. Cuatro dicen que una relación entre contenedores no tiene tecnología: "Enruta solicitudes", "Solicita ruta óptima", "Solicita ubicación en tiempo real" y "Dispara evento" | El C2 final de la guía (Parte B, Paso 4) incumple su propia regla: "cada relación explica cómo se comunican". Al agregar el protocolo a esas cuatro relaciones, los errores bajan a 2. |
+
+Los 2 errores que quedan dicen que el sistema no tiene documentación ni decisiones registradas en Structurizr. En este taller esas dos cosas viven en `entrega/informe.md` y `entrega/decisiones.md`, así que se pueden ignorar.
+
+### C.5 Aplicarlo al cliente real
+
+1. Copie la carpeta `validacion-tecnica/` a `entrega/validacion-tecnica/`.
+2. Reescriba `workspace.dsl` con los actores, sistemas externos, contenedores y relaciones de su C1 y su C2 del cliente.
+3. Corrija hasta que el modelo cargue sin errores de elementos inexistentes y las inspecciones solo muestren los 2 errores de documentación y decisiones.
+4. Compare las vistas que dibuja Structurizr con sus diagramas de draw.io (los botones **PNG** y **SVG** de la barra superior exportan cada vista).
+5. En `entrega/informe.md`, anote qué inconsistencias encontró entre el C1 y el C2 y qué cambió en los diagramas por eso.
+
+Los diagramas en draw.io siguen siendo el entregable del taller; el `.dsl` es la forma de comprobarlos.
+
+---
+
+## Parte D — Análisis de caso real y panorama tecnológico (opcional)
+
+### D.1 Caso: el servicio de monitoreo de Prime Video que pasó de microservicios a un monolito (2023)
+
+**Qué pasó.** En marzo de 2023, el equipo de análisis de calidad de video de Amazon Prime Video publicó en su blog técnico cómo rediseñó la herramienta que monitorea la calidad de las transmisiones de audio y video. La primera versión estaba hecha de componentes distribuidos: funciones AWS Lambda coordinadas por AWS Step Functions, que se pasaban los datos intermedios a través del almacenamiento Amazon S3. Al crecer el número de transmisiones, el servicio alcanzó los límites de la cuenta y el costo se disparó, por las transiciones de estado de la orquestación y por la transferencia de datos a S3. El equipo juntó los componentes en un solo proceso que corre en Amazon EC2 y Amazon ECS, con los datos intermedios en memoria, y reportó una reducción de alrededor del 90 % en el costo de infraestructura.
+
+El artículo generó un debate amplio. Varios analistas, entre ellos Adrian Cockcroft (exarquitecto de Netflix y exvicepresidente de AWS), señalaron que el cambio fue de un solo servicio y no de toda la plataforma, y que empezar con componentes serverless para validar la idea y luego optimizar fue una decisión razonable, no un error.
+
+**Qué significa, en el lenguaje de este taller.** Es una decisión de C2: cuántos contenedores tiene el sistema. En la primera versión, cada etapa del monitoreo era un contenedor y cada flecha entre ellos cruzaba la red y pasaba por S3. En la segunda, esas etapas quedaron dentro de un solo contenedor y las flechas se convirtieron en llamadas en memoria. La pregunta de la Parte B ("¿qué se despliega por separado?") tiene consecuencias de costo y de operación, no solo de dibujo.
+
+**Preguntas para el análisis.**
+
+1. Dibuje un C2 aproximado de la versión distribuida y uno de la versión monolítica. ¿Cuántos contenedores y cuántas relaciones tiene cada uno?
+2. En el C2 de RedExpress, el Módulo de Gestión de Paquetes llama al Motor de Rutas, a Seguimiento GPS y al Sistema de Alertas. ¿Qué ganaría y qué perdería RedExpress si los juntara en un solo contenedor?
+3. Registre una de esas decisiones en `entrega/decisiones.md` con la [plantilla de decisiones](../plantillas/plantilla_decisiones.md): decisión, alternativas, razón y consecuencia.
+
+**Fuentes.** [InfoQ, mayo de 2023](https://www.infoq.com/news/2023/05/prime-ec2-ecs-saves-costs/); [DevClass, 5 de mayo de 2023](https://devclass.com/2023/05/05/reduce-costs-by-90-by-moving-from-microservices-to-monolith-amazon-internal-case-study-raises-eyebrows/); [The Stack, sobre la opinión de Adrian Cockcroft](https://thestack.technology/prime-video-monolith-architecture-debate-bad-takes-adrian-cockcroft). El artículo original se publicó en el blog técnico de Prime Video (primevideotech.com); si lo cita, verifique que siga disponible.
+
+### D.2 Panorama tecnológico
+
+**Herramientas para documentar C4.**
+
+| Herramienta | Cómo funciona | Conviene cuando |
+|---|---|---|
+| draw.io | Se dibuja a mano, con plantillas de formas C4 | Se quiere rapidez y el equipo no programa (es la herramienta del entregable) |
+| Structurizr (Lite o en la nube) | Un modelo en texto, varias vistas generadas, inspecciones automáticas | Se quiere que C1 y C2 sean consistentes y versionar el modelo en Git (Parte C) |
+| C4-PlantUML | Cada diagrama en texto, dibujado con PlantUML | El equipo ya usa PlantUML; cada diagrama es independiente, así que no hay deducción entre vistas |
+| Mermaid (diagramas C4) | Texto dentro de archivos Markdown, GitHub lo dibuja directamente | Se quieren diagramas dentro de la documentación del repositorio. El soporte de C4 en Mermaid todavía está marcado como experimental |
+| IcePanel | Herramienta visual en línea con un modelo único detrás | Se quiere la consistencia de un modelo sin escribir código; es un servicio comercial con plan gratuito limitado |
+
+**Estilos de arquitectura en el C2.**
+
+| Estilo | Cómo se ve en el C2 | Conviene cuando | Riesgo principal |
+|---|---|---|---|
+| Monolito | Un solo contenedor de aplicación y su base de datos | Equipo pequeño, dominio todavía cambiante, poco presupuesto de operación | Todo se despliega junto; una parte con mucha carga obliga a escalar todo |
+| Monolito modular | Un solo contenedor, con módulos internos de límites claros (se ven en C3) | Se quiere la simplicidad del monolito sin perder orden interno | Que los límites entre módulos se respeten solo en el papel |
+| Microservicios | Varios contenedores pequeños, cada uno con sus datos | Equipos independientes que necesitan desplegar y escalar por separado | Costo de red, de operación y de monitoreo; fallas en cadena entre servicios |
+| Serverless | Funciones y servicios administrados del proveedor de nube | Cargas variables o esporádicas; se paga por uso | Costo difícil de prever cuando el uso crece (caso Prime Video) y dependencia del proveedor |
+
+Ningún estilo es mejor en abstracto. La justificación tiene que salir del cliente: tamaño del equipo, volumen de uso, presupuesto y capacidad de operar lo que se construye. Esa comparación es la base del TO-BE del Taller 7.
+
+### D.3 Aplicarlo al cliente real
+
+1. Identifique qué estilo tiene hoy el sistema del cliente según su C2 (monolito, microservicios, mezcla).
+2. Busque un caso público y documentado de un cambio de estilo de arquitectura (en cualquier dirección) en el sector del cliente o en una organización de tamaño similar.
+3. Analícelo con la [plantilla de análisis de caso](../plantillas/plantilla_analisis_caso.md) y guárdelo en `entrega/analisis-caso.md`. En la sección 5, compare dos estilos de la tabla anterior para el sistema del cliente.
+
+---
+
 _Esta guía hace parte del Taller 3 de Arquitectura Actual del Sistema con el Modelo C4 — curso Arquitectura Empresarial, Universidad de La Sabana._
